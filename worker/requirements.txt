@@ -13,3 +13,7 @@ PyMuPDF==1.24.10
 pdfminer.six==20231228
 python-dotenv==1.0.1
 pydantic==2.9.2
+
+# AI Detection
+transformers==4.45.0
+torch==2.5.0

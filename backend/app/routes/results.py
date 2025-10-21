@@ -10,6 +10,20 @@ async def get_result(job_id: str):
     if job_id.startswith("dev_"):
         import random
         similarity_score = round(random.uniform(0.08, 0.35), 3)
+        ai_probability = round(random.uniform(0.15, 0.75), 3)
+        
+        # Determine AI confidence level
+        if ai_probability >= 0.80:
+            ai_confidence = "Very High - Likely AI-generated"
+        elif ai_probability >= 0.60:
+            ai_confidence = "High - Probably AI-generated"
+        elif ai_probability >= 0.40:
+            ai_confidence = "Medium - Possibly AI-generated"
+        elif ai_probability >= 0.20:
+            ai_confidence = "Low - Probably human-written"
+        else:
+            ai_confidence = "Very Low - Likely human-written"
+        
         return {
             "job_id": job_id,
             "status": "SUCCESS",
@@ -46,6 +60,17 @@ async def get_result(job_id: str):
                     "ngram": round(similarity_score * 0.6, 3),
                     "lexical": round(similarity_score * 0.9, 3),
                     "semantic": round(similarity_score * 0.7, 3)
+                },
+                "ai_detection": {
+                    "probability": ai_probability,
+                    "confidence": ai_confidence,
+                    "scores": {
+                        "perplexity": round(random.uniform(0.3, 0.7), 3),
+                        "burstiness": round(random.uniform(0.2, 0.6), 3),
+                        "patterns": round(random.uniform(0.1, 0.5), 3),
+                        "vocabulary": round(random.uniform(0.4, 0.8), 3),
+                        "roberta": round(ai_probability * random.uniform(0.9, 1.1), 3)
+                    }
                 }
             },
         }

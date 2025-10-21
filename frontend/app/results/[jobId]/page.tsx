@@ -9,6 +9,11 @@ type ResultPayload = {
   summary?: { similarity: number; sources: any[]; processing_time_ms: number };
   fragments?: any[];
   explain?: Record<string, number>;
+  ai_detection?: {
+    probability: number;
+    confidence: string;
+    scores: Record<string, number>;
+  };
 };
 
 export default function ResultsPage({ params }: { params: { jobId: string } }) {
@@ -220,7 +225,60 @@ export default function ResultsPage({ params }: { params: { jobId: string } }) {
         </div>
       </div>
 
-      {/* Detailed Metrics */}
+      {/* AI Detection Card */}
+      {result.ai_detection && (
+        <div style={{
+          background: 'rgba(255, 255, 255, 0.95)',
+          borderRadius: 16,
+          padding: 32,
+          boxShadow: '0 10px 40px rgba(0,0,0,0.1)',
+          border: '3px solid #9f7aea'
+        }}>
+          <h3 style={{ margin: '0 0 24px 0', fontSize: 20, fontWeight: 700, color: '#2d3748' }}>
+            🤖 AI Detection Analysis
+          </h3>
+          
+          <div style={{
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            borderRadius: 16,
+            padding: 32,
+            textAlign: 'center',
+            marginBottom: 24
+          }}>
+            <div style={{ fontSize: 64, fontWeight: 800, color: '#fff', marginBottom: 8 }}>
+              {(result.ai_detection.probability * 100).toFixed(1)}%
+            </div>
+            <div style={{ fontSize: 18, fontWeight: 600, color: '#fff', marginBottom: 4 }}>
+              AI Probability
+            </div>
+            <div style={{
+              display: 'inline-block',
+              padding: '8px 20px',
+              background: 'rgba(255, 255, 255, 0.2)',
+              backdropFilter: 'blur(10px)',
+              color: '#fff',
+              borderRadius: 20,
+              fontSize: 14,
+              fontWeight: 700,
+              marginTop: 8
+            }}>
+              {result.ai_detection.confidence}
+            </div>
+          </div>
+
+          {result.ai_detection.scores && Object.entries(result.ai_detection.scores).map(([key, value]) => {
+            const aiColors = ['#9f7aea', '#ed64a6', '#f56565', '#ed8936', '#48bb78'];
+            const colorIndex = Object.keys(result.ai_detection!.scores).indexOf(key);
+            return renderProgressBar(
+              value as number,
+              key.charAt(0).toUpperCase() + key.slice(1) + ' Score',
+              aiColors[colorIndex % aiColors.length]
+            );
+          })}
+        </div>
+      )}
+
+      {/* Plagiarism Detailed Metrics */}
       <div style={{
         background: 'rgba(255, 255, 255, 0.95)',
         borderRadius: 16,
@@ -228,7 +286,7 @@ export default function ResultsPage({ params }: { params: { jobId: string } }) {
         boxShadow: '0 10px 40px rgba(0,0,0,0.1)'
       }}>
         <h3 style={{ margin: '0 0 24px 0', fontSize: 20, fontWeight: 700, color: '#2d3748' }}>
-          📈 Detailed Analysis
+          📈 Plagiarism Detection Analysis
         </h3>
         
         {result.explain && Object.entries(result.explain).map(([key, value]) => {
