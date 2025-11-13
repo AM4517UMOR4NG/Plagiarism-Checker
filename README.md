@@ -1,4 +1,4 @@
-# 🔍 Professional Plagiarism Checker
+# 🔍  Plagiarism Checker
 
 A production-grade plagiarism detection system with modern UI and advanced AI-powered similarity detection.
 
