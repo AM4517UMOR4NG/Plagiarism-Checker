@@ -192,7 +192,7 @@ NEXT_PUBLIC_API_BASE=http://localhost:8000
 - All timestamps in UTC
 - CORS enabled for local development
 
-## 🔮 Roadmap
+## 🔮 Road map
 
 - [ ] User authentication & authorization
 - [ ] Document history & management
