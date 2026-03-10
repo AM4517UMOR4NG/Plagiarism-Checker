@@ -58,11 +58,12 @@ export default function HomePage() {
 
   return (
     <div style={{
-      background: 'rgba(255, 255, 255, 0.95)',
-      borderRadius: 16,
-      padding: '40px',
-      boxShadow: '0 10px 40px rgba(0,0,0,0.1)',
-      backdropFilter: 'blur(10px)'
+      background: 'rgba(255, 255, 255, 0.88)',
+      borderRadius: 20,
+      padding: '44px',
+      boxShadow: '0 24px 80px rgba(16,24,40,0.18)',
+      backdropFilter: 'blur(14px)',
+      border: '1px solid rgba(255,255,255,0.6)'
     }}>
       <h2 style={{
         marginTop: 0,
@@ -74,7 +75,7 @@ export default function HomePage() {
       <p style={{
         marginTop: 0,
         marginBottom: 32,
-        color: '#666',
+        color: '#475569',
         fontSize: 14
       }}>Upload a document or paste text to check for plagiarism and similarity matches</p>
       
@@ -89,7 +90,7 @@ export default function HomePage() {
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter document title..."
             style={inputStyle}
-            onFocus={(e) => e.target.style.borderColor = '#667eea'}
+            onFocus={(e) => e.target.style.borderColor = '#06b6d4'}
             onBlur={(e) => e.target.style.borderColor = '#e0e0e0'}
           />
         </div>
@@ -106,9 +107,10 @@ export default function HomePage() {
             style={{
               ...inputStyle,
               resize: 'vertical',
-              minHeight: 200
+              minHeight: 200,
+              background: 'linear-gradient(180deg, #ffffff 0%, #fbfbff 100%)'
             }}
-            onFocus={(e) => e.target.style.borderColor = '#667eea'}
+            onFocus={(e) => e.target.style.borderColor = '#06b6d4'}
             onBlur={(e) => e.target.style.borderColor = '#e0e0e0'}
           />
         </div>
@@ -118,26 +120,26 @@ export default function HomePage() {
             📎 Or Upload File (PDF, DOCX, TXT)
           </label>
           <div style={{
-            border: '2px dashed #e0e0e0',
-            borderRadius: 10,
+            border: '2px dashed #cbd5e1',
+            borderRadius: 14,
             padding: 32,
             textAlign: 'center',
-            backgroundColor: '#fafafa',
+            background: 'linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)',
             transition: 'all 0.3s ease'
           }}
           onDragOver={(e) => {
             e.preventDefault();
-            e.currentTarget.style.borderColor = '#667eea';
-            e.currentTarget.style.backgroundColor = '#f0f4ff';
+            e.currentTarget.style.borderColor = '#06b6d4';
+            e.currentTarget.style.backgroundColor = '#ecfeff';
           }}
           onDragLeave={(e) => {
-            e.currentTarget.style.borderColor = '#e0e0e0';
-            e.currentTarget.style.backgroundColor = '#fafafa';
+            e.currentTarget.style.borderColor = '#cbd5e1';
+            e.currentTarget.style.backgroundColor = '#ffffff';
           }}
           onDrop={(e) => {
             e.preventDefault();
-            e.currentTarget.style.borderColor = '#e0e0e0';
-            e.currentTarget.style.backgroundColor = '#fafafa';
+            e.currentTarget.style.borderColor = '#cbd5e1';
+            e.currentTarget.style.backgroundColor = '#ffffff';
             const files = e.dataTransfer.files;
             if (files.length > 0) setFile(files[0]);
           }}>
@@ -152,7 +154,7 @@ export default function HomePage() {
               {file ? (
                 <div>
                   <div style={{ fontSize: 40, marginBottom: 8 }}>✅</div>
-                  <div style={{ fontWeight: 600, color: '#667eea' }}>{file.name}</div>
+                  <div style={{ fontWeight: 600, color: '#0ea5e9' }}>{file.name}</div>
                   <div style={{ fontSize: 13, color: '#999', marginTop: 4 }}>
                     {(file.size / 1024).toFixed(1)} KB
                   </div>
@@ -160,7 +162,7 @@ export default function HomePage() {
               ) : (
                 <div>
                   <div style={{ fontSize: 48, marginBottom: 8 }}>📁</div>
-                  <div style={{ fontWeight: 600, color: '#666', marginBottom: 4 }}>
+                  <div style={{ fontWeight: 600, color: '#334155', marginBottom: 4 }}>
                     Click to upload or drag and drop
                   </div>
                   <div style={{ fontSize: 13, color: '#999' }}>
@@ -180,29 +182,29 @@ export default function HomePage() {
             fontSize: 16,
             fontWeight: 600,
             color: '#fff',
-            background: loading || (!text.trim() && !file) 
-              ? '#ccc' 
-              : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            background: loading || (!text.trim() && !file)
+              ? '#cbd5e1'
+              : 'linear-gradient(135deg, #06b6d4 0%, #8b5cf6 50%, #f43f5e 100%)',
             border: 'none',
-            borderRadius: 10,
+            borderRadius: 12,
             cursor: loading || (!text.trim() && !file) ? 'not-allowed' : 'pointer',
             transition: 'all 0.3s ease',
-            boxShadow: loading || (!text.trim() && !file) 
-              ? 'none' 
-              : '0 4px 15px rgba(102, 126, 234, 0.4)',
+            boxShadow: loading || (!text.trim() && !file)
+              ? 'none'
+              : '0 12px 30px rgba(139,92,246,0.35)',
             transform: 'scale(1)'
           }}
           onMouseEnter={(e) => {
             if (!loading && (text.trim() || file)) {
-              e.currentTarget.style.transform = 'scale(1.02)';
-              e.currentTarget.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.5)';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 16px 40px rgba(139,92,246,0.45)';
             }
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = 'scale(1)';
             e.currentTarget.style.boxShadow = loading || (!text.trim() && !file)
               ? 'none'
-              : '0 4px 15px rgba(102, 126, 234, 0.4)';
+              : '0 12px 30px rgba(139,92,246,0.35)';
           }}
         >
           {loading ? "🔄 Analyzing Document..." : "🚀 Check for Plagiarism"}
