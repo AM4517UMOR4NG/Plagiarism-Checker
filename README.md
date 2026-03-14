@@ -2,32 +2,106 @@
 
 Professional-grade plagiarism detection platform that combines FastAPI services, Celery-powered background processing, and a polished Next.js 14 interface. The system emulates commercial plagiarism suites with rich analytics, fragment-level insights, and extensible infrastructure for production deployments.
 
+<p align="center">
+  <img alt="Status" src="https://img.shields.io/badge/status-active-success?style=for-the-badge&color=10b981" />
+  <img alt="Backend" src="https://img.shields.io/badge/FastAPI-Backend-0EA5E9?style=for-the-badge&logo=fastapi" />
+  <img alt="Frontend" src="https://img.shields.io/badge/Next.js-14-000000?style=for-the-badge&logo=next.js" />
+  <img alt="License" src="https://img.shields.io/badge/License-Professional-blueviolet?style=for-the-badge" />
+</p>
+
+<div align="center">
+  <table>
+    <tr>
+      <td><strong>⚙️ Pipelines</strong><br/>Hybrid Celery workers orchestrate multi-stage NLP similarity checks.</td>
+      <td><strong>📊 Analytics</strong><br/>Risk gradients, fragment explorer, per-algorithm telemetry.</td>
+      <td><strong>☁️ Infra Ready</strong><br/>Docker-first layouts + IaC scaffolding for cloud rollout.</td>
+    </tr>
+  </table>
+</div>
+
 ---
 
 ## Table of Contents
-1. [Architecture at a Glance](#architecture-at-a-glance)
-2. [Feature Overview](#feature-overview)
-3. [Directory Structure](#directory-structure)
-4. [Environment Matrix](#environment-matrix)
-5. [System Components](#system-components)
-6. [Quick Start (Windows)](#quick-start-windows)
-7. [Deployment Options](#deployment-options)
-8. [End-to-End Workflow](#end-to-end-workflow)
-9. [Data Lifecycle & Storage](#data-lifecycle--storage)
-10. [API Surface](#api-surface)
-11. [Frontend Experience](#frontend-experience)
-12. [Worker & Processing Pipeline](#worker--processing-pipeline)
-13. [Testing & Quality](#testing--quality)
-14. [Observability & Operations](#observability--operations)
-15. [Security & Compliance](#security--compliance)
-16. [Performance & Scalability](#performance--scalability)
-17. [Configuration Reference](#configuration-reference)
-18. [Troubleshooting & Tips](#troubleshooting--tips)
-19. [Roadmap](#roadmap)
-20. [Supporting Docs](#supporting-docs)
-21. [Contribution Guidelines](#contribution-guidelines)
-22. [FAQ](#faq)
-23. [License](#license)
+1. [Visual Overview](#visual-overview)
+2. [Architecture at a Glance](#architecture-at-a-glance)
+3. [Feature Overview](#feature-overview)
+4. [Directory Structure](#directory-structure)
+5. [Environment Matrix](#environment-matrix)
+6. [System Components](#system-components)
+7. [Quick Start (Windows)](#quick-start-windows)
+8. [Deployment Options](#deployment-options)
+9. [End-to-End Workflow](#end-to-end-workflow)
+10. [Data Lifecycle & Storage](#data-lifecycle--storage)
+11. [API Surface](#api-surface)
+12. [Frontend Experience](#frontend-experience)
+13. [Worker & Processing Pipeline](#worker--processing-pipeline)
+14. [Testing & Quality](#testing--quality)
+15. [Observability & Operations](#observability--operations)
+16. [Security & Compliance](#security--compliance)
+17. [Performance & Scalability](#performance--scalability)
+18. [Configuration Reference](#configuration-reference)
+19. [Troubleshooting & Tips](#troubleshooting--tips)
+20. [Roadmap](#roadmap)
+21. [Supporting Docs](#supporting-docs)
+22. [Contribution Guidelines](#contribution-guidelines)
+23. [FAQ](#faq)
+24. [License](#license)
+
+---
+
+## Visual Overview
+
+> **Experience Flow** – From dropzone to insight cards, every touchpoint is illustrated below for a quick mental model.
+
+```mermaid
+graph LR
+    A[User Uploads] --> B(Next.js Form)
+    B --> C{FastAPI Gateway}
+    C -->|Validate| D[(PostgreSQL)]
+    C -->|Enqueue| E[[Redis Queue]]
+    E --> F[[Celery Workers]]
+    F --> G[Similarity Engines]
+    G --> H>Results Store]
+    H --> I{Results API}
+    I --> J[Interactive Dashboard]
+```
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant UI as Frontend UI
+    participant API as FastAPI
+    participant Worker as Celery Worker
+    participant Store as Results Store
+
+    User->>UI: Drag & drop document
+    UI->>API: POST /api/v1/upload
+    API->>Worker: Dispatch job (Redis)
+    Worker-->>API: Status updates
+    API-->>UI: job_id + progress
+    Worker->>Store: Persist scores/fragments
+    UI->>API: GET /api/v1/results/{job_id}
+    API->>UI: Detailed report JSON
+    UI->>User: Visual insights + fragments
+```
+
+### UI Layout Blueprint
+
+```
+┌───────────────────────────────────────────┐
+│ Header (logo + action buttons)           │
+├───────────────┬──────────────────────────┤
+│ Upload Panel  │ Hero Metrics Card        │
+│ - Drag area   │ - Similarity gauge       │
+│ - File stats  │ - Risk badge             │
+├───────────────┴──────────────────────────┤
+│ Algorithm Breakdown (progress stacks)    │
+├──────────────────────────────────────────┤
+│ Fragment Explorer + Source Timeline      │
+└───────────────────────────────────────────┘
+```
+
+Pair these visuals with live screenshots (drop `docs/ui-preview.png`) to complete the narrative.
 
 ---
 
