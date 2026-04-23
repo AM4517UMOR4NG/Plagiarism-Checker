@@ -444,23 +444,6 @@ Code reviews focus on correctness, readability, and adherence to the architectur
 
 ---
 
-## FAQ
-
-**Q: Do I need Redis to try the UI?**  
-A: No. Without Redis/Celery the backend returns deterministic mock results so you can demo the interface instantly.
-
-**Q: Which file types are supported?**  
-A: PDF, DOCX, and TXT by default. Extend the normalization pipeline to support Markdown or HTML as needed.
-
-**Q: How do I plug in a different embedding model?**  
-A: Update the worker configuration (`MODEL_NAME`) and ensure dependencies for the new Sentence Transformer are installed. Rebuild FAISS indices if dimensionality changes.
-
-**Q: Can I deploy on serverless platforms?**  
-A: The frontend can be hosted serverlessly, but the worker and FastAPI API currently expect long-running containers. Consider managed Celery-compatible services or convert to serverless tasks.
-
-**Q: Where can I see API docs?**  
-A: Run the backend and open `http://localhost:8000/docs` (Swagger UI) or `/redoc` for detailed schemas.
-
 ---
 
 ## License
