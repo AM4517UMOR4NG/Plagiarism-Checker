@@ -44,8 +44,7 @@ Professional-grade plagiarism detection platform that combines FastAPI services,
 20. [Roadmap](#roadmap)
 21. [Supporting Docs](#supporting-docs)
 22. [Contribution Guidelines](#contribution-guidelines)
-23. [FAQ](#faq)
-24. [License](#license)
+23. [License](#license)
 
 ---
 
