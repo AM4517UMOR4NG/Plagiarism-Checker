@@ -447,4 +447,4 @@ Code reviews focus on correctness, readability, and adherence to the architectur
 
 ## License
 
-Educational and professional use permitted. Contact the maintainers for commercial licensing inquiries.
+Educational and professional use permitted.
