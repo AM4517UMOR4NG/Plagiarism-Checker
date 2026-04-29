@@ -277,37 +277,6 @@ Personally identifiable information (PII) should be anonymized before long-term 
 
 All endpoints return structured JSON with error codes aligned to FastAPI exception handlers. CORS is enabled for `http://localhost:3000` by default.
 
----
-
-## Frontend Experience
-
-### Upload Screen
-- Gradient background with radial highlights for premium feel.
-- Drag-and-drop zone, file picker, clipboard paste support.
-- Live file metadata (type, size) and validation feedback.
-- CTA button "🚀 Check for Plagiarism" triggers upload + status poller.
-
-### Results Dashboard
-- Prominent overall similarity percentage with color-coded risk badge (Low/Medium/High).
-- Per-algorithm bars show contribution of cosine, N-gram, lexical, semantic, etc.
-- Fragment viewer highlights suspicious excerpts with source reference and overlap score.
-- Secondary stats: processing time, number of sources, token count, detection heuristics triggered.
-
-Responsive layouts ensure that both screens remain usable on tablets and large desktops.
-
----
-
-## Worker & Processing Pipeline
-
-1. **Ingestion** – document is normalized (PDF/DOCX → text) and split into logical sections.
-2. **Embedding generation** – Sentence Transformers produce vector representations; lexical shingles are created for FAISS/Elasticsearch.
-3. **Similarity matching** – multiple algorithms (cosine, N-gram, lexical heuristics, semantic) run in parallel to mitigate false negatives.
-4. **Aggregation** – per-algorithm scores are weighted, risk levels assigned, matched fragments curated with source context.
-5. **Persistence** – results stored for retrieval; optional MinIO/PostgreSQL integration ensures durability.
-
-Mock mode bypasses steps 2–5 with deterministic sample data for rapid UI iteration.
-
----
 
 ## Testing & Quality
 
