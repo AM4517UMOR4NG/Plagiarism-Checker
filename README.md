@@ -415,5 +415,3 @@ Code reviews focus on correctness, readability, and adherence to the architectur
 ---
 
 ## License
-
-Educational and professional use permitted.
