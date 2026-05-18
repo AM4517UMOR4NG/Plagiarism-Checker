@@ -414,4 +414,3 @@ Code reviews focus on correctness, readability, and adherence to the architectur
 
 ---
 
-## License
